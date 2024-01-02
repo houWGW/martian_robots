@@ -14,6 +14,7 @@ class Utility():
         self.input_file = input_file
         self.output_file = output_file
         self.grid_size, self.robots_command = self.input_loader()
+        self.output = ''
     def input_loader(self):
         """
         Load input txt file
@@ -26,42 +27,42 @@ class Utility():
             robots_command (dict): containing initial position and 
                 commands for each robot
         """
-        file = open(self.input_file, "r")
-        grid_size = None
-        robots_command = {}
-        robot_number = 0
-        new_robot = True
-        for line in file:
-            # Read first line of input file as definition for grid size
-            if grid_size == None:
-                try:
-                    grid_size = line.strip().split()
-                    assert(len(grid_size) == 2)
-                except:
-                    print("First line for grid size input not valid")
-                    break
-            # Ignore empty line seperators for different block of input
-            elif line.strip() == '':
-                pass
-            # Read input for robot initial position
-            elif grid_size != None and new_robot == True:
-                robots_command[str(robot_number)] = {}
-                try:
-                    robots_command[str(robot_number)]['init_pos'] = line.strip().split()
-                    assert(len(robots_command[str(robot_number)]['init_pos']) == 3)
-                except:
-                    print("Inputs for robot initial position not valid")
-                    break
-                new_robot = False
-            # Read input for robot movements
-            elif grid_size != None and new_robot == False:
-                try:
-                    robots_command[str(robot_number)]['move'] = [*line.strip()]
-                except:
-                    print("Inputs for robot movements not valid")
-                    break
-                new_robot = True
-                robot_number += 1
+        with open(self.input_file, "r") as file:
+            grid_size = None
+            robots_command = {}
+            robot_number = 0
+            new_robot = True
+            for line in file:
+                # Read first line of input file as definition for grid size
+                if grid_size == None:
+                    try:
+                        grid_size = line.strip().split()
+                        assert(len(grid_size) == 2)
+                    except:
+                        print("First line for grid size input not valid")
+                        break
+                # Ignore empty line seperators for different block of input
+                elif line.strip() == '':
+                    pass
+                # Read input for robot initial position
+                elif grid_size != None and new_robot == True:
+                    robots_command[str(robot_number)] = {}
+                    try:
+                        robots_command[str(robot_number)]['init_pos'] = line.strip().split()
+                        assert(len(robots_command[str(robot_number)]['init_pos']) == 3)
+                    except:
+                        print("Inputs for robot initial position not valid")
+                        break
+                    new_robot = False
+                # Read input for robot movements
+                elif grid_size != None and new_robot == False:
+                    try:
+                        robots_command[str(robot_number)]['move'] = [*line.strip()]
+                    except:
+                        print("Inputs for robot movements not valid")
+                        break
+                    new_robot = True
+                    robot_number += 1
 
         return grid_size, robots_command
     
@@ -118,4 +119,27 @@ class Utility():
 
         return int(list(self.robots_command.keys())[-1])>=self.robot_number
 
+    def aggregate_output(self, output):
+        """
+        Aggregate output from next robot
 
+        Args:
+            output (str): string output for next robot
+        
+        Returns:
+            None
+        """
+        self.output += (output + '\n')
+    
+    def write_output(self):
+        """
+        Write the aggregated output to an output file
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
+        with open(self.output_file, 'w') as file:
+            file.write(self.output)

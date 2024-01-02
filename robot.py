@@ -20,6 +20,9 @@ class Robot():
         self.lost = False
         self.load_command_library()
         assert all(x in self.move_mapping.keys() for x in self.move), 'Unknown robot command type.'
+        assert type(self.x) == int, 'Robot initial x coordinate not valid.'
+        assert type(self.y) == int, 'Robot initial y coordinate not valid.'
+        assert self.orient in set(['N', 'S', 'W', 'E']), 'Robot orientation not valid.'
 
     def execute_next_move(self):
         """
@@ -110,4 +113,17 @@ class Robot():
             # }
         }
 
+    def report_availability(self):
+        """
+        Report whether the robot is lost
 
+        Args:
+            None
+        
+        Returns:
+            str: ' LOST' if lost, '' if not
+        """
+        if self.lost:
+            return ' LOST'
+        else:
+            return ''
