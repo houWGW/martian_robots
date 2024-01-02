@@ -7,8 +7,8 @@ class Grid:
         Bottom left corner of the grid is assumed (0,0)
 
         Args:
-            x_max: x coordinate of top right corner of grid
-            y_max: y coordinate of top right corner of grid
+            x_max (int): x coordinate of top right corner of grid
+            y_max (int): y coordinate of top right corner of grid
         """
         pass
     
