@@ -16,6 +16,9 @@ class TestStringMethods(unittest.TestCase):
     
         with self.assertRaises(AssertionError):
             rt = Robot(3 ,2 ,'N',['F','R','B'])
+        
+        with self.assertRaises(AssertionError):
+            rt = Robot(3 ,2 ,'N',['F']* 200)
     
     def test_execute_next_move(self):
         rt = Robot(3, 2, 'N', ['F','R','R','F','L','L','F','F','R','R','F','L','L'])

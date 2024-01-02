@@ -12,6 +12,15 @@ class TestStringMethods(unittest.TestCase):
 
         with self.assertRaises(AssertionError):
             gd = Grid(3,'b')
+        
+        with self.assertRaises(AssertionError):
+            gd = Grid(51, 4)
+        with self.assertRaises(AssertionError):
+            gd = Grid(3, 60)
+        with self.assertRaises(AssertionError):
+            gd = Grid(-2, 4)
+        with self.assertRaises(AssertionError):
+            gd = Grid(5, -4)
     
     def test_load_robot(self):
         rt = Robot(3, 2, 'N', ['F','R','R','F','L','L','F','F','R','R','F','L','L'])

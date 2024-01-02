@@ -16,6 +16,7 @@ class Grid:
         self.y_max = y_max
         self.loss_point = set()
         assert type(self.x_max) == int and type(self.y_max) == int, 'Grid size input is not valid'
+        assert 0 <= self.x_max <= 50 and 0 <= self.y_max <= 50, 'Grid size too large, limit is 50 x 50'
     
     def load_robot(self, robot: Robot):
         """

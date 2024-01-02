@@ -32,5 +32,6 @@ while utility.robots_in_queue():
         grid.add_loss_memory()
     # Process and write output
     output = grid.report_last_condition() + robot.report_availability()
+    print(output)
     utility.aggregate_output(output)
 utility.write_output()

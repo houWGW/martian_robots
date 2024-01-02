@@ -19,7 +19,8 @@ class Robot():
         self.next_move = 0
         self.lost = False
         self.load_command_library()
-        assert all(x in self.move_mapping.keys() for x in self.move), 'Unknown robot command type.'
+        assert type(self.move) == list and all(x in self.move_mapping.keys() for x in self.move), 'Unknown robot command type.'
+        assert len(self.move) <= 100, 'Robot command too long, limit is 100'
         assert type(self.x) == int, 'Robot initial x coordinate not valid.'
         assert type(self.y) == int, 'Robot initial y coordinate not valid.'
         assert self.orient in set(['N', 'S', 'W', 'E']), 'Robot orientation not valid.'
