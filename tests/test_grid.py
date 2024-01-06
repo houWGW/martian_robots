@@ -87,3 +87,29 @@ class TestStringMethods(unittest.TestCase):
             gd.add_loss_memory()
         self.assertEqual(gd.report_last_condition(), '0 3 W')
         self.assertEqual(rt2.lost, False)
+        # Test robot 3
+        rt3 = Robot(4, 2, 'N', ['F','R','F','F'])
+        gd.load_robot(rt3)
+        while rt3.move_in_queue() and rt3.lost == False:
+            rt3.execute_next_move()
+            if gd.in_grid_boundary():
+                gd.get_robot_condition()
+            else:
+                gd.record_lost()
+            gd.prevent_loss()
+            gd.add_loss_memory()
+        self.assertEqual(gd.report_last_condition(), '5 3 E')
+        self.assertEqual(rt3.lost, True)
+        # Test robot 4
+        rt4 = Robot(5, 3, 'N', ['F'])
+        gd.load_robot(rt4)
+        while rt4.move_in_queue() and rt4.lost == False:
+            rt4.execute_next_move()
+            if gd.in_grid_boundary():
+                gd.get_robot_condition()
+            else:
+                gd.record_lost()
+            gd.prevent_loss()
+            gd.add_loss_memory()
+        self.assertEqual(gd.report_last_condition(), '5 3 N')
+        self.assertEqual(rt4.lost, False)

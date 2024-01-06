@@ -38,7 +38,7 @@ class Utility():
                     try:
                         grid_size = line.strip().split()
                         assert(len(grid_size) == 2)
-                    except:
+                    except Exception:
                         print("First line for grid size input not valid")
                         break
                 # Ignore empty line seperators for different block of input
@@ -50,7 +50,7 @@ class Utility():
                     try:
                         robots_command[str(robot_number)]['init_pos'] = line.strip().split()
                         assert(len(robots_command[str(robot_number)]['init_pos']) == 3)
-                    except:
+                    except Exception:
                         print("Inputs for robot initial position not valid")
                         break
                     new_robot = False
@@ -58,7 +58,7 @@ class Utility():
                 elif grid_size != None and new_robot == False:
                     try:
                         robots_command[str(robot_number)]['move'] = [*line.strip()]
-                    except:
+                    except Exception:
                         print("Inputs for robot movements not valid")
                         break
                     new_robot = True

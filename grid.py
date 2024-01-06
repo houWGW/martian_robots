@@ -31,6 +31,7 @@ class Grid:
         self.robot = robot
         assert type(self.robot) == Robot, 'Robot have to be an instance of Robot'
         assert self.in_grid_boundary, 'Robot initial position outside of grid boundary'
+        self.get_robot_condition()
 
     def get_robot_condition(self):
         """
